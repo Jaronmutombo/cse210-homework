@@ -4,65 +4,57 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Journal Project.");
-    }
+        Journal journal = new Journal();
+        PromptGenerator promptGenerator = new PromptGenerator();
 
-    public class Entry
-    {
-        public string _date;
-        public string _promptText;
-        public string _entryText;
+        int choice = 0;
 
-        public void DisplayEntry()
+        while (choice != 5)
         {
-            Console.WriteLine($"Date: {_date}");
-            Console.WriteLine($"Prompt: {_promptText}");
-            Console.WriteLine($"Response: {_entryText}");
-        }
-    }
+            Console.WriteLine("Journal Menu");
+            Console.WriteLine("1. Write new entry");
+            Console.WriteLine("2. Display journal");
+            Console.WriteLine("3. Save journal");
+            Console.WriteLine("4. Load journal");
+            Console.WriteLine("5. Quit");
 
-    public class Journal
-    {
-        public List<Entry> _entries = new List<Entry>();
+            Console.Write("Select a choice: ");
+            
 
-        public void AddEntry(Entry entry)
-        {
-            _entries.Add(entry);
-        }
-
-        public void DisplayAll()
-        {
-            foreach (Entry entry in _entries)
+            if (choice == 1)
             {
-                entry.DisplayEntry();
+                string prompt = promptGenerator.GetRandomPrompt();
+
+                Console.WriteLine(prompt);
+                Console.Write("> ");
+                string response = Console.ReadLine();
+
+                Entry entry = new Entry();
+                entry._date = DateTime.Now.ToShortDateString();
+                entry._promptText = prompt;
+                entry._entryText = response;
+
+                journal.AddEntry(entry);
+            }
+
+            else if (choice == 2)
+            {
+                journal.DisplayAll();
+            }
+
+            else if (choice == 3)
+            {
+                Console.Write("Enter filename: ");
+                string file = Console.ReadLine();
+                journal.SaveToFile(file);
+            }
+
+            else if (choice == 4)
+            {
+                Console.Write("Enter filename: ");
+                string file = Console.ReadLine();
+                journal.LoadFromFile(file);
             }
         }
-
-        public void SaveToFile(string filename)
-        {
-            
-        }
-
-        public void LoadFromFile(string filename)
-        {
-        }
     }
-
-    public class PromptGenerator
-    {
-        private List<string> _prompts;
-
-        public PromptGenerator()
-        {
-            _prompts = new List<string>
-            {
-                "How did you find Christ in your life today?",
-                "How did you embody the teachings of Christ in your actions today?",
-                "Describe a challenge you faced and how you overcame it.",
-                "What is something new you learned today?",
-                "Write about a moment that made you smile."
-            };
-        }
-    }
-
 }

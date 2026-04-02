@@ -7,7 +7,7 @@ class Program
     {
         List<Video> videos = new List<Video>();
 
-        // Video 1
+        
         Video video1 = new Video();
         video1._title = "Learning C# Basics";
         video1._author = "John Smith";
@@ -18,7 +18,7 @@ class Program
         video1._comments.Add(new Comment("Charlie", "Thanks for explaining."));
         videos.Add(video1);
 
-        // Video 2
+      
         Video video2 = new Video();
         video2._title = "Object-Oriented Programming";
         video2._author = "Jane Doe";
@@ -29,7 +29,7 @@ class Program
         video2._comments.Add(new Comment("Tom", "Good explanation."));
         videos.Add(video2);
 
-        // Video 3
+       
         Video video3 = new Video();
         video3._title = "Lists in C#";
         video3._author = "Code Academy";
